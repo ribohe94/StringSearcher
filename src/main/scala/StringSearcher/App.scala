@@ -11,7 +11,7 @@ object App {
     if (!args.isEmpty) {
       val inputDir = ETL.getDirectoryPath(args(0))
       if (inputDir != null) ConsoleRunner(inputDir).runConsoleInterface()
-    }
+    } else println("No directory specified, terminating")
 
   }
 

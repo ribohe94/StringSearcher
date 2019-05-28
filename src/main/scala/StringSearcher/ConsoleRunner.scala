@@ -6,8 +6,11 @@ import scala.io.StdIn
 
 case class ConsoleRunner(inputDir: File) {
 
-  private val indexedFiles = ETL.indexedFilesToDictionary(inputDir)
+  private val indexedFiles = ETL.indexedFilesToSet(inputDir)
 
+  /**
+    * Starts the console application
+    */
   def runConsoleInterface(): Unit = {
     while (true) {
       print("search> ")
