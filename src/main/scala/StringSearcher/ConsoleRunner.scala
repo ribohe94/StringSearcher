@@ -1,19 +1,31 @@
 package StringSearcher
 
+import java.io.File
+
 import scala.io.StdIn
-import util.control.Breaks._
 
-object ConsoleRunner {
+case class ConsoleRunner(inputDir: File) {
 
-  def runConsoleInterface(dir: String): Unit = {
+  private val indexedFiles = ETL.indexedFilesToMap(inputDir)
+
+  def runConsoleInterface(): Unit = {
 
     while(true) {
       print("search> ")
       StdIn.readLine() match {
         case ":quit" => return
+        case words: String => displayRanking(StringSearcher.getWordsRank(inputParser(words), indexedFiles))
       }
     }
 
+  }
+
+  private def inputParser(input: String): Vector[String] = {
+    input.split(" ").toVector
+  }
+
+  private def displayRanking(ranking: Vector[(String, Double)]) = {
+    ranking.foreach(tuple => println(s"${tuple._1}: ${tuple._2}%"))
   }
 
 }
