@@ -1,13 +1,19 @@
 package StringSearcher
 
-import java.io.File
-
 /**
- * Hello world!
- *
- */
-object App extends App {
+  * Hello world!
+  *
+  */
+object App {
 
-  ConsoleRunner(new File("data/")).runConsoleInterface()
+  def main(args: Array[String]): Unit = {
+
+    if (!args.isEmpty) {
+      val inputDir = ETL.getDirectoryPath(args(0))
+      if (inputDir != null) ConsoleRunner(inputDir).runConsoleInterface()
+    }
+
+  }
+
 
 }

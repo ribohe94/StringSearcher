@@ -6,26 +6,22 @@ import scala.io.StdIn
 
 case class ConsoleRunner(inputDir: File) {
 
-  private val indexedFiles = ETL.indexedFilesToMap(inputDir)
+  private val indexedFiles = ETL.indexedFilesToDictionary(inputDir)
 
   def runConsoleInterface(): Unit = {
-
-    while(true) {
+    while (true) {
       print("search> ")
       StdIn.readLine() match {
         case ":quit" => return
-        case words: String => displayRanking(StringSearcher.getWordsRank(inputParser(words), indexedFiles))
+        case words: String => displayRanking(StringSearcher.getFilesRanking(words.split(" ").toVector, indexedFiles))
       }
     }
-
   }
 
-  private def inputParser(input: String): Vector[String] = {
-    input.split(" ").toVector
-  }
-
-  private def displayRanking(ranking: Vector[(String, Double)]) = {
-    ranking.foreach(tuple => println(s"${tuple._1}: ${tuple._2}%"))
+  private def displayRanking(rankedFiles: Vector[(String, Double)]): Unit = {
+    if (rankedFiles.isEmpty) println("No matches found") else {
+      rankedFiles.foreach(tuple => println(f"${tuple._1}: ${tuple._2}%1.2f%%"))
+    }
   }
 
 }
