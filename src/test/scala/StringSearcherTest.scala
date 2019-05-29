@@ -29,11 +29,12 @@ class StringSearcherTest extends TestCase {
     // output limit is 10
     val words = "lorem ipsum sit".split(" ").toVector
     val indexedFiles = Map(
-      "file1.txt"-> Set("lorem", "ipsum"),
-      "file2.txt"-> Set("lorem"),
-      "file3.txt"-> Set("lorem", "sit")
+      "file3.txt"-> Set("lorem"),
+      "file2.txt"-> Set("lorem", "ipsum"),
+      "file1.txt"-> Set("lorem", "ipsum", "sit")
     )
-    assert(StringSearcher.getFilesRanking(words, indexedFiles).size == 10)
+    val ranks = StringSearcher.getFilesRanking(words, indexedFiles).map(_._2)
+    assert(ranks == ranks.sortBy(- _))
   }
 
 }
