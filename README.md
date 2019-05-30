@@ -49,6 +49,32 @@ search>
 
 ## Process
 #### Selecting the right data structures
+I decided to go for a `Map[String, Set[String]]` structure to index the files with their corresponding words since `Map` lookup speed is eficiently constant, faster than some of its counterparts like `List`. Same goes for `Set`.
+An indexed files Map would look like this: 
+~~~
+Map(
+      "file3.txt"-> Set("lorem"),
+      "file2.txt"-> Set("lorem", "ipsum"),
+      "file1.txt"-> Set("lorem", "ipsum", "sit")
+    )
+~~~
 
+#### Data input
+I created a simple ET class that takes care of two things: 
+1. Recursively extract all of the files inside the input folder.
+2. Transforming it into the desired data structure `Map[String, Set[String]]`.
+(There is no loading phase for this class so I excluded the _L_ from the usual _ETL_)
 
+#### String Searcher
+`StringSearcher` takes care of recursively evaluating the corresponding rank of each file based on the input words.
 
+#### Console application
+I created a simple class to simulate a console experience, it takes two kinds of input: 
+1. It parses the input words and sends them to the searching algorithm
+2. Closes the application when `:quit` is inpt by the user.
+
+## Time management
+I spent around 5 hours total to complete this task. Most of the time was cnsumed in:
+1. Considering the right data structure for the indexed files.
+2. General design of the application
+3. Trying to generate an uber JAR with maven. It was taking me too long to produce a JAR that contained both Java and Scala's libraries without failing so I opted to run the program directly from maven with the aforementionned command.
