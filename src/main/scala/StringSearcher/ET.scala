@@ -4,7 +4,7 @@ import java.io.File
 
 import scala.io.Source
 
-object ETL {
+object ET {
 
   /**
     *
@@ -16,11 +16,21 @@ object ETL {
     listOfFiles.map(file => file.getName -> fileToSetOfWords(file)).toMap
   }
 
+  /**
+    *
+    * @param inputDir input directory
+    * @return input directory as a java.io.File object. Returns null if the input is not a file nor a directory
+    */
   def getDirectoryFile(inputDir: String): File = {
     val file = new File(inputDir)
     if (file.exists && file.isDirectory) file else null
   }
 
+  /**
+    *
+    * @param file input file from the input directory
+    * @return All words of the file as a Set[String] object
+    */
   private def fileToSetOfWords(file: File): Set[String] = {
     val fileLines = Source.fromFile(file.getPath)
     val wordSet = fileLines.getLines().toVector.reduce(_ ++ _).split(" ").toSet
@@ -28,6 +38,11 @@ object ETL {
     wordSet
   }
 
+  /**
+    *
+    * @param directory input directory
+    * @return list of files found recursively inside the input directory
+    */
   private def getListOfFiles(directory: File): List[File] = {
     if (directory.exists() && directory.isDirectory) {
       directory.listFiles().filter(_.isFile).toList

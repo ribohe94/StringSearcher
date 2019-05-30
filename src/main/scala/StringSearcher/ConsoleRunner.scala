@@ -21,6 +21,11 @@ case class ConsoleRunner(inputDir: File) {
     }
   }
 
+  /**
+    * Prints out the ranking result for each file
+    *
+    * @param rankedFiles Vector of ranked files
+    */
   private def displayRanking(rankedFiles: Vector[(String, Double)]): Unit = {
     if (rankedFiles.isEmpty) println("No matches found") else {
       rankedFiles.foreach(tuple => println(f"${tuple._1}: ${tuple._2}%1.2f%%"))
