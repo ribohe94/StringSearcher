@@ -6,7 +6,7 @@ import scala.io.StdIn
 
 case class ConsoleRunner(inputDir: File) {
 
-  private val indexedFiles = ETL.indexedFilesToSet(inputDir)
+  private val indexedFiles = ET.indexedFilesToSet(inputDir)
 
   /**
     * Starts the console application

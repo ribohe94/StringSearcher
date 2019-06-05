@@ -1,11 +1,11 @@
-import StringSearcher.ETL
+import StringSearcher.ET
 import junit.framework.TestCase
 import org.junit.Test
 
 class ETLTest extends TestCase {
 
   @Test def testNullWhenInvalidPath {
-    assert(ETL.getDirectoryFile("does/not/exist") == null)
+    assert(ET.getDirectoryFile("does/not/exist") == null)
   }
 
 }
